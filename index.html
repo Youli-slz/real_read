@@ -208,8 +208,8 @@
             <div class="swiper-wrapper">
             </div>
             <div class="swiper-pagination"></div>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
+            <!-- <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div> -->
         </div>
         <div class="tab_hb">
             <div class="tab_hd_inner">
@@ -292,7 +292,7 @@
                     else {
                         $(".tab_bd").html('<div v-else style="text-align: center;margin-top: 60px;">暂无章节</div>')
                     }
-                    html += '<div type="index" data-index="3" class="item "><a href="history.html">往期</a></div>'
+                    html += '<a href="history.html"><div type="index" data-index="3" class="item ">往期</div></a>'
                     $('.tab_hd_inner').html(html)
                     $(".item:first-child").addClass('active')
                 },
@@ -308,8 +308,8 @@
         window.onload = function () {
             var mySwiper = new Swiper('.swiper-container', {
                 pagination: '.swiper-pagination',
-                nextButton: '.swiper-button-next',
-                prevButton: '.swiper-button-prev',
+                // nextButton: '.swiper-button-next',
+                // prevButton: '.swiper-button-prev',
                 paginationClickable: true,
                 spaceBetween: 30,
                 centeredSlides: true,

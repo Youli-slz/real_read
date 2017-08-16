@@ -79,7 +79,7 @@
                     if (data1.code == 0 && data1.data.length) {
                         var html = '';
                         for (var item in data1.data) {
-                            html += '<li><a href="reader.html?WNum=' + data1.data[item].id + '">' + data1.data[item].title + '</a></li>'
+                            html += '<li><a href="index.html?WNum=' + data1.data[item].id + '">' + data1.data[item].title + '</a></li>'
                         }
                         console.log(html);
                         $('#' + num + 'two').html(html);
