@@ -8,16 +8,32 @@
     <link rel="stylesheet" href="assets/css/style.css" media="screen" type="text/css" />
 
     <title>往期</title>
+    <style>
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+            margin-top: 20px;
+        }
+
+        #xian {
+            margin-left: 4%;
+            width: 92%;
+            border-bottom: 1px solid #cbcbcb;
+        }
+    </style>
 </head>
 
 <body style="">
     <div style="text-align: center;">
         <h2 style="margin-top:20px;">往期周刊</h2>
     </div>
-    <div class="container">
+    <div class="container" style="margin-bottom:40px;">
         <ul></ul>
     </div>
-
+    <div id="xian"></div>
+    <div class="logo">
+        <img src="assets/logo.jpg" width="100px;">
+    </div>
 
     <script src="assets/js/jquery-3.2.1.min.js"></script>
 
@@ -30,7 +46,7 @@
                 url: "http://wxmpapi.gatao.cn/api/response.do",
                 data: JSON.stringify({
                     action_name: "web_get_issue",
-                    data:{
+                    data: {
                         page_no: 1,
                         page_size: 20
                     }
@@ -68,7 +84,7 @@
                 url: "http://wxmpapi.gatao.cn/api/response.do",
                 data: JSON.stringify({
                     action_name: "web_get_books",
-                    data:{
+                    data: {
                         weekly_id: Number($(this)[0].id),
                         page_no: 1,
                         page_size: 20
@@ -122,7 +138,6 @@
             var page = 1;
             getdata(page);
         })
-
     </script>
 
     <!-- <script src="assets/js/index.js"></script> -->

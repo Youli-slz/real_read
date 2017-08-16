@@ -25,7 +25,7 @@
             position: relative;
         }
 
-        #top p {
+        #myp{
             position: absolute;
             left: 0;
             right: 0;
@@ -43,6 +43,7 @@
             text-overflow: ellipsis;
             white-space: nowrap;
             word-wrap: normal;
+            text-align: left;
         }
 
         .tab_hd {
@@ -199,15 +200,25 @@
             -webkit-align-items: center;
             align-items: center;
         }
+        .logo{
+            text-align: center;
+            margin-bottom: 20px;
+            margin-top: 20px;
+        }
+        #xian{
+            margin-left:4%;
+            width: 92%;
+            border-bottom: 1px solid #cbcbcb;
+        }
     </style>
 </head>
 
 <body>
-    <div class="container" id="list" style="padding-bottom: 44px;">
+    <div class="container" id="list" style="margin-bottom:20px;">
         <div class="swiper-container">
             <div class="swiper-wrapper">
             </div>
-            <div class="swiper-pagination"></div>
+            <div class="swiper-pagination" style="padding-left: 150px;"></div>
             <!-- <div class="swiper-button-prev"></div>
             <div class="swiper-button-next"></div> -->
         </div>
@@ -218,6 +229,10 @@
         <div class="tab_bd">
             <div class="article_list article_list_0"></div>
         </div>
+    </div>
+    <div id="xian"></div>
+    <div class="logo">
+        <img src="assets/logo.jpg" width="100px;">
     </div>
     <script src="assets/js/jquery-3.2.1.min.js"></script>
     <script src="assets/js/swiper-3.4.2.min.js"></script>
@@ -248,7 +263,7 @@
                         console.log(data.data);
                         $.each(data.data, function (j, y) {
                             console.log(y)
-                            $('.swiper-wrapper').append($('<div class="swiper-slide"><a href=' + y.url + '><img src=' + y.pic_url + ' width="100%" height="180px"/></a></div>'));
+                            $('.swiper-wrapper').append($('<div class="swiper-slide"><a href=' + y.url + '><img src=' + y.pic_url + ' width="100%" height="180px"/><p id="myp">'+ y.description +'</p></a></div>'));
                         })
                     }
                 },
