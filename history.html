@@ -50,6 +50,7 @@
                         // console.log(html);
                         $('.container ul').append(html)
                     }
+                    getclass();
                 },
                 error: function (err) {
 
@@ -57,7 +58,7 @@
             });
         }
         $(".container ul").on("click", "li", function () {
-            getclass();// var index =$(this).index();
+            // var index =$(this).index();
             console.log($(this)[0].id);
             var num = $(this)[0].id;
             console.log(Number(num));
