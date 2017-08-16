@@ -293,23 +293,38 @@
                     var html = ''
                     var article = ''
                     var bookName = GetQueryString('bookName')
+                    var ishistory = GetQueryString('Hs');
                     if (data.code == 0) {
                         booklist = data.data.list
-                        html += '<div class="item" onclick="select(this)" style="width:50%">' + data.data.book_name + '</div>'
-                        var list = ''
-                        for (var j in booklist) {
-                            list += '<a class="list_item js_post" href="' + booklist[j].url + '"><div class="cover"><img class="img js_img" src="' + booklist[j].pic + '" alt=""></div><div class="cont"><h2 class="title js_title">' + booklist[j].title + '</h2><p class="desc">' + booklist[j].description + '</p></div></a>'
+                        if(ishistory == 0){
+                            html += '<div class="item"  style="width:50%">' + data.data.book_name + '</div>'
+                            var list = ''
+                            for (var j in booklist) {
+                                list += '<a class="list_item js_post" href="' + booklist[j].url + '"><div class="cover"><img class="img js_img" src="' + booklist[j].pic + '" alt=""></div><div class="cont"><h2 class="title js_title">' + booklist[j].title + '</h2><p class="desc">' + booklist[j].description + '</p></div></a>'
+                            }
+                            article += '<div class="article_list article_list_0">' + list + '</div>'
+                            $(".tab_bd").html(article)
+                            $(".tab_bd .article_list:first-child").css('display', 'block')
                         }
-                        article += '<div class="article_list article_list_0">' + list + '</div>'
-                        $(".tab_bd").html(article)
-                        $(".tab_bd .article_list:first-child").css('display', 'block')
+                        else{
+                            html += '<div class="item"  style="width:100%">' + data.data.book_name + '</div>'
+                            var list = ''
+                            for (var j in booklist) {
+                                list += '<a class="list_item js_post" href="' + booklist[j].url + '"><div class="cover"><img class="img js_img" src="' + booklist[j].pic + '" alt=""></div><div class="cont"><h2 class="title js_title">' + booklist[j].title + '</h2><p class="desc">' + booklist[j].description + '</p></div></a>'
+                            }
+                            article += '<div class="article_list article_list_0">' + list + '</div>'
+                            $(".tab_bd").html(article)
+                            $(".tab_bd .article_list:first-child").css('display', 'block')                 
+                        }
 
                     }
                     else {
                         $(".tab_bd").html('<div v-else style="text-align: center;margin-top: 60px;">暂无章节</div>')
                     }
-                    html += '<a class="item " href="history.html"><div type="index" data-index="3">往期</div></a>'
-                    $('.tab_hd_inner').html(html)
+                    if(ishistory == 0){
+                        html += '<a class="item " href="history.html"><div type="index" data-index="3">往期</div></a>'
+                    }
+                        $('.tab_hd_inner').html(html)
                     $(".item:first-child").addClass('active')
                 },
                 error: function (err) {
