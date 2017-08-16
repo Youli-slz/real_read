@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <link rel="stylesheet" href="assets/css/swiper-3.4.2.min.css">
+    <title>读书</title>
+    <style type="text/css">
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        #top {
+            width: 100%;
+            height: 180px;
+            background: url(http://mmbiz.qpic.cn/mmbiz_jpg/SicJ1hibLmTjiasWRdRmHEcPrBiafQokODPxALbgwXkHnwo7blEDo7zhR8sickxeu5v5q8j0IGBBxEe18EaAu0XqwyA/640?wx_fmt=jpeg) no-repeat center center;
+            background-size: cover;
+            position: relative;
+        }
+
+        #top p {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            box-sizing: border-box;
+            /*height: 1.4em;*/
+            font-size: 16px;
+            padding: 20px 50px 12px 13px;
+            background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, .7) 100%);
+            background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, .7) 100%);
+            color: #fff;
+            text-shadow: 0 1px 0 rgba(0, 0, 0, .5);
+            width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            word-wrap: normal;
+        }
+
+        .tab_hd {
+            height: 44px;
+        }
+
+        .tab_hd_inner .item {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            width: 50%;
+            float: left;
+            text-align: center;
+            padding: 14px 6px;
+            background: #f2f2f2;
+            font-size: 15px;
+            box-sizing: border-box;
+        }
+
+        .tab_hd_inner .item.active {
+            color: #21b100;
+        }
+
+        .list_item {
+            display: block;
+            padding: 15px 15px 10px 10px;
+            overflow: hidden;
+            position: relative;
+            text-decoration: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .list_item .cover {
+            float: left;
+            margin-right: 10px;
+        }
+
+        .list_item .cover .img {
+            display: block;
+            width: 80px;
+            height: 60px;
+        }
+
+        .list_item .cont {
+            overflow: hidden;
+        }
+
+        .list_item .cont .title {
+            font-weight: 400;
+            font-size: 16px;
+            color: #000;
+            width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            word-wrap: normal;
+        }
+
+        .list_item .cont .desc {
+            font-size: 13px;
+            color: #999;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            line-height: 1.3;
+        }
+
+        .list_item:after {
+            content: " ";
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 1px;
+            border-bottom: 1px solid #e2e2e2;
+            -webkit-transform-origin: 0 100%;
+            -ms-transform-origin: 0 100%;
+            transform-origin: 0 100%;
+            -webkit-transform: scaleY(.5);
+            -ms-transform: scaleY(.5);
+            transform: scaleY(.5);
+            left: 10px;
+        }
+
+        .article_list {
+            display: none;
+        }
+
+        .tab_hd_inner {
+            overflow: hidden;
+        }
+
+        .btn {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            border-top: 1px solid #eee;
+            overflow: hidden;
+        }
+
+        .btn a {
+            display: block;
+            padding: 14px 0;
+            width: 50%;
+            text-align: center;
+            float: left;
+            background: #fff;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .btn a:first-child {
+            border-right: 1px solid #eee;
+            margin-left: -1px;
+        }
+
+        html,
+        body {
+            position: relative;
+            height: 100%;
+        }
+
+        body {
+            background: #eee;
+            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            color: #000;
+            margin: 0;
+            padding: 0;
+        }
+
+        .swiper-container {
+            width: 100%;
+            height: 180px;
+        }
+
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #fff;
+
+            /* Center slide text vertically */
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" id="list" style="padding-bottom: 44px;">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+        <div class="tab_hb">
+            <div class="tab_hd_inner">
+            </div>
+        </div>
+        <div class="tab_bd">
+            <div class="article_list article_list_0"></div>
+        </div>
+    </div>
+    <script src="assets/js/jquery-3.2.1.min.js"></script>
+    <script src="assets/js/swiper-3.4.2.min.js"></script>
+    <script type="text/javascript">
+        var booklist;
+        var articlelist;
+        function GetQueryString(name) {    // 获取url中的WNum=  后面的周数
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        }
+        function getbanner() {
+            $.ajax({
+                type: "post",
+                contentType: 'application/json',
+                url: "http://wxmpapi.gatao.cn/api/response.do",
+                data:JSON.stringify({
+                    action_name: "web_get_carousels",
+                    data: "web_get_carousels"
+                }),
+                dataType: 'json',
+                async: true,
+                success: function (data) {
+                    console.log(data.data);
+                    if (data.code == 0) {
+                        // $('#link').attr('href', data.data.renderUrl);
+                        // $('#top').css('background-image', 'url(' + data.data.picUrl + ')')
+                        console.log(data.data);
+                        $.each(data.data, function (j, y) {
+                            console.log(y)
+                            $('.swiper-wrapper').append($('<div class="swiper-slide"><a href=' + y.url + '><img src=' + y.pic_url + ' width="100%" height="180px"/></a></div>'));
+                        })
+                    }
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+        }
+        function getdata() {
+            $.ajax({
+                type: "post",
+                contentType: 'application/json',
+                url: "http://wxmpapi.gatao.cn/api/response.do",
+                data: JSON.stringify({ 
+                    action_name: "web_get_articles",
+                    data:{
+                        book_id: Number(GetQueryString('WNum')),
+                        page_no: 1,
+                        page_size: 20
+                    }
+                 }),
+                dataType: 'json',
+                async: true,
+                success: function (data) {
+                    console.log(data)
+                    var html = ''
+                    var article = ''
+                    var bookName = GetQueryString('bookName')
+                    if (data.code == 0) {
+                        booklist = data.data.list
+                            html += '<div class="item" onclick="select(this)" style="width:50%">' + data.data.book_name + '</div>'
+                            var list = ''
+                            for (var j in booklist) {
+                                list += '<a class="list_item js_post" href="' + booklist[j].url + '"><div class="cover"><img class="img js_img" src="' + booklist[j].pic + '" alt=""></div><div class="cont"><h2 class="title js_title">' + booklist[j].title + '</h2><p class="desc">' + booklist[j].description + '</p></div></a>'
+                            }
+                            article += '<div class="article_list article_list_0">' + list + '</div>'
+                        $(".tab_bd").html(article)
+                        $(".tab_bd .article_list:first-child").css('display', 'block')
+
+                    }
+                    else {
+                        $(".tab_bd").html('<div v-else style="text-align: center;margin-top: 60px;">暂无章节</div>')
+                    }
+                    html += '<div type="index" data-index="3" class="item "><a href="history.html">往期</a></div>'
+                    $('.tab_hd_inner').html(html)
+                    $(".item:first-child").addClass('active')
+                },
+                error: function (err) {
+
+                }
+            });
+        }
+        $(function () {   // 相当于初始化，页面显示的时候执行
+            getbanner();
+            getdata();
+        })
+        window.onload = function () {
+            var mySwiper = new Swiper('.swiper-container', {
+                pagination: '.swiper-pagination',
+                nextButton: '.swiper-button-next',
+                prevButton: '.swiper-button-prev',
+                paginationClickable: true,
+                spaceBetween: 30,
+                centeredSlides: true,
+                autoplay: 2500,
+                speed:500,
+
+                observer: true,
+                observeParents: true,
+                autoplayDisableOnInteraction: false
+            })
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <link rel="stylesheet" href="assets/css/normalize.css">
+    <link rel="stylesheet" href="assets/css/style.css" media="screen" type="text/css" />
+
+    <title>往期</title>
+</head>
+
+<body style="">
+    <div style="text-align: center;">
+        <h2 style="margin-top:20px;">往期周刊</h2>
+    </div>
+    <div class="container">
+        <ul></ul>
+    </div>
+
+
+    <script src="assets/js/jquery-3.2.1.min.js"></script>
+
+    <script type="text/javascript">
+        var zhouqi;
+        function getdata(page) {
+            $.ajax({
+                type: 'post',
+                contentType: 'application/json',
+                url: "http://wxmpapi.gatao.cn/api/response.do",
+                data: JSON.stringify({
+                    action_name: "web_get_issue",
+                    data:{
+                        page_no: 1,
+                        page_size: 20
+                    }
+                }),
+                dataType: 'json',
+                async: true,
+                success: function (data) {
+                    console.log(data);
+                    if (data.code == 0 && data.data.length) {
+                        var html = '';
+                        for (var item in data.data) {
+                            console.log(data.data[item])
+                            // html += '<li><a href="读书.html?WNun=' + data.data[item].WNun +'">' + data.data[item].title + '</a></li>'
+                            html += '<li id="' + data.data[item].id + '" class="dropdown"><a href="#" data-toggle="dropdown" >' + data.data[item].title + ' <i class="icon-arrow"></i></a><ul id="' + data.data[item].id + 'two"class="dropdown-menu"></ul>'
+
+                        }
+                        // console.log(html);
+                        $('.container ul').append(html)
+                    }
+                },
+                error: function (err) {
+
+                }
+            });
+        }
+        $(".container ul").on("click", "li", function () {
+            getclass();// var index =$(this).index();
+            console.log($(this)[0].id);
+            var num = $(this)[0].id;
+            console.log(Number(num));
+            $.ajax({
+                type: "post",
+                contentType: 'application/json',
+                url: "http://wxmpapi.gatao.cn/api/response.do",
+                data: JSON.stringify({
+                    action_name: "web_get_books",
+                    data:{
+                        weekly_id: Number($(this)[0].id),
+                        page_no: 1,
+                        page_size: 20
+                    }
+                }),
+                dataType: 'json',
+                async: true,
+                success: function (data1) {
+                    if (data1.code == 0 && data1.data.length) {
+                        var html = '';
+                        for (var item in data1.data) {
+                            html += '<li><a href="reader.html?WNum=' + data1.data[item].id + '">' + data1.data[item].title + '</a></li>'
+                        }
+                        console.log(html);
+                        $('#' + num + 'two').html(html);
+                    }
+                }
+            })
+        })
+        function getclass() {
+            var dropdown = document.querySelectorAll('.dropdown');
+            var dropdownArray = Array.prototype.slice.call(dropdown, 0);
+            dropdownArray.forEach(function (el) {
+                var button = el.querySelector('a[data-toggle="dropdown"]'),
+                    menu = el.querySelector('.dropdown-menu'),
+                    arrow = button.querySelector('i.icon-arrow');
+
+                button.onclick = function (event) {
+                    if (!menu.hasClass('show')) {
+                        menu.classList.add('show');
+                        menu.classList.remove('hide');
+                        arrow.classList.add('open');
+                        arrow.classList.remove('close');
+                        event.preventDefault();
+                    }
+                    else {
+                        menu.classList.remove('show');
+                        menu.classList.add('hide');
+                        arrow.classList.remove('open');
+                        arrow.classList.add('close');
+                        event.preventDefault();
+                    }
+                };
+            })
+
+            Element.prototype.hasClass = function (className) {
+                return this.className && new RegExp("(^|\\s+)" + className + "(\\s+|$)").test(this.className);
+            };
+        }
+        $(function () {
+            var page = 1;
+            getdata(page);
+        })
+
+    </script>
+
+    <!-- <script src="assets/js/index.js"></script> -->
+</body>
+
+</html>
