@@ -56,7 +56,7 @@
             width: 50%;
             float: left;
             text-align: center;
-            padding: 14px 6px;
+            padding: 10px 6px;
             background: #f2f2f2;
             font-size: 15px;
             box-sizing: border-box;
@@ -167,7 +167,7 @@
         }
 
         body {
-            background: #eee;
+            background: #fff;
             font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
             font-size: 14px;
             color: #000;
@@ -292,7 +292,7 @@
                     else {
                         $(".tab_bd").html('<div v-else style="text-align: center;margin-top: 60px;">暂无章节</div>')
                     }
-                    html += '<div style="position:absolute;z-index:1;width:2px;background:#d1d1d1;height:47px;left:50%" align="center"></div><a href="history.html"><div type="index" data-index="3" class="item ">往期</div></a>'
+                    html += '<a class="item " href="history.html"><div type="index" data-index="3">往期</div></a>'
                     $('.tab_hd_inner').html(html)
                     $(".item:first-child").addClass('active')
                 },
