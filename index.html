@@ -234,7 +234,7 @@
                 type: "post",
                 contentType: 'application/json',
                 url: "http://wxmpapi.gatao.cn/api/response.do",
-                data:JSON.stringify({
+                data: JSON.stringify({
                     action_name: "web_get_carousels",
                     data: "web_get_carousels"
                 }),
@@ -262,14 +262,14 @@
                 type: "post",
                 contentType: 'application/json',
                 url: "http://wxmpapi.gatao.cn/api/response.do",
-                data: JSON.stringify({ 
+                data: JSON.stringify({
                     action_name: "web_get_articles",
-                    data:{
+                    data: {
                         book_id: Number(GetQueryString('WNum')),
                         page_no: 1,
                         page_size: 20
                     }
-                 }),
+                }),
                 dataType: 'json',
                 async: true,
                 success: function (data) {
@@ -279,12 +279,12 @@
                     var bookName = GetQueryString('bookName')
                     if (data.code == 0) {
                         booklist = data.data.list
-                            html += '<div class="item" onclick="select(this)" style="width:50%">' + data.data.book_name + '</div>'
-                            var list = ''
-                            for (var j in booklist) {
-                                list += '<a class="list_item js_post" href="' + booklist[j].url + '"><div class="cover"><img class="img js_img" src="' + booklist[j].pic + '" alt=""></div><div class="cont"><h2 class="title js_title">' + booklist[j].title + '</h2><p class="desc">' + booklist[j].description + '</p></div></a>'
-                            }
-                            article += '<div class="article_list article_list_0">' + list + '</div>'
+                        html += '<div class="item" onclick="select(this)" style="width:50%">' + data.data.book_name + '</div>'
+                        var list = ''
+                        for (var j in booklist) {
+                            list += '<a class="list_item js_post" href="' + booklist[j].url + '"><div class="cover"><img class="img js_img" src="' + booklist[j].pic + '" alt=""></div><div class="cont"><h2 class="title js_title">' + booklist[j].title + '</h2><p class="desc">' + booklist[j].description + '</p></div></a>'
+                        }
+                        article += '<div class="article_list article_list_0">' + list + '</div>'
                         $(".tab_bd").html(article)
                         $(".tab_bd .article_list:first-child").css('display', 'block')
 
@@ -292,7 +292,7 @@
                     else {
                         $(".tab_bd").html('<div v-else style="text-align: center;margin-top: 60px;">暂无章节</div>')
                     }
-                    html += '<a href="history.html"><div type="index" data-index="3" class="item ">往期</div></a>'
+                    html += '<a href="history.html"><div type="index" data-index="3" class="item " id="mydiv">往期</div></a>'
                     $('.tab_hd_inner').html(html)
                     $(".item:first-child").addClass('active')
                 },
@@ -301,6 +301,13 @@
                 }
             });
         }
+
+        $("#mydiv").on('click', 'div', function () {
+            // alert(1111);
+            var mydiv = document.getElementById('mydiv');
+            mydiv.style.backgroundColor = "#c9c9c9";
+        })
+        
         $(function () {   // 相当于初始化，页面显示的时候执行
             getbanner();
             getdata();
@@ -314,7 +321,7 @@
                 spaceBetween: 30,
                 centeredSlides: true,
                 autoplay: 2500,
-                speed:500,
+                speed: 500,
 
                 observer: true,
                 observeParents: true,
