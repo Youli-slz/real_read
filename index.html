@@ -199,6 +199,9 @@
             -webkit-align-items: center;
             align-items: center;
         }
+        #mydiv{
+            border:1px solid #c9c9c9;
+        }
     </style>
 </head>
 
@@ -302,12 +305,6 @@
             });
         }
 
-        $("#mydiv").on('click', 'div', function () {
-            // alert(1111);
-            var mydiv = document.getElementById('mydiv');
-            mydiv.style.backgroundColor = "#c9c9c9";
-        })
-        
         $(function () {   // 相当于初始化，页面显示的时候执行
             getbanner();
             getdata();
