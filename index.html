@@ -211,7 +211,7 @@
 </head>
 
 <body>
-    <div class="main" style="margin-bottom:500px;">
+    <div class="main">
         <div class="container" id="list">
             <div class="swiper-container">
                 <div class="swiper-wrapper">
@@ -302,7 +302,7 @@
                             for (var j in booklist) {
                                 list += '<a class="list_item js_post" href="' + booklist[j].url + '"><div class="cover"><img class="img js_img" src="' + booklist[j].pic + '" alt=""></div><div class="cont"><h2 class="title js_title">' + booklist[j].title + '</h2><p class="desc">' + booklist[j].description + '</p></div></a>'
                             }
-                            article += '<div class="article_list article_list_0">' + list + '</div>'
+                             article += '<div class="article_list article_list_0">' + list + '</div>'
                             $(".tab_bd").html(article)
                             $(".tab_bd .article_list:first-child").css('display', 'block')
                         }
@@ -312,7 +312,7 @@
                             for (var j in booklist) {
                                 list += '<a class="list_item js_post" href="' + booklist[j].url + '"><div class="cover"><img class="img js_img" src="' + booklist[j].pic + '" alt=""></div><div class="cont"><h2 class="title js_title">' + booklist[j].title + '</h2><p class="desc">' + booklist[j].description + '</p></div></a>'
                             }
-                            article += '<div class="article_list article_list_0">' + list + '</div>'
+                             article += '<div class="article_list article_list_0">' + list + '</div>'
                             $(".tab_bd").html(article)
                             $(".tab_bd .article_list:first-child").css('display', 'block')                 
                         }
@@ -332,7 +332,6 @@
                 }
             });
         }
-
         $(function () {   // 相当于初始化，页面显示的时候执行
             getbanner();
             getdata();
