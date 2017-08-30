@@ -300,7 +300,7 @@
                             $('.close_pic').html('');
                         }
                         else {
-                            $(".PIC_1").html('<div class="QR_Code"><img src="http://7xld1x.com1.z0.glb.clouddn.com/FueQdux8CSVXc8Ajzoe77yMZErT7" width="115" height="165" /></div>')
+                            $(".PIC_1").html('<div class="QR_Code"><img src="'+ data.data.qrcode_url +'" width="115" height="165" /></div>')
                         }
                         $.each(data.data.list, function (j, y) {
                             console.log(y)
