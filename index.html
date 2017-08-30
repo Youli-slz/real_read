@@ -25,7 +25,7 @@
             position: relative;
         }
 
-        #myp{
+        #myp {
             position: absolute;
             left: 0;
             right: 0;
@@ -200,12 +200,30 @@
             -webkit-align-items: center;
             align-items: center;
         }
-        .logo{
+
+        .logo {
             text-align: center;
             margin-top: 20px;
         }
-        .guo p{
-            color:#fff;
+
+        .guo p {
+            color: #fff;
+        }
+
+        .QR_Code {
+            position: fixed;
+            right: 5px;
+            bottom: 70px;
+        }
+
+        .QR_Code img {
+            box-shadow: 0px 0px 10px #000;
+        }
+
+        .close_pic {
+            position: fixed;
+            right: 100px;
+            bottom: 215px;
         }
     </style>
 </head>
@@ -228,6 +246,10 @@
                 <div class="article_list article_list_0"></div>
             </div>
         </div>
+        <div class="PIC_1">
+
+        </div>
+        <div class="close_pic"><img src="assets/close.png" width="20px;" height="20px;"></div>
         <div class="logo">
             <img src="assets/logo.jpg" width="100px;">
         </div>
@@ -240,11 +262,20 @@
     <script type="text/javascript">
         var booklist;
         var articlelist;
+        var pagenum = 1;
+        var isarr = 0;
+        var QR_Url = '';
         function GetQueryString(name) {    // 获取url中的WNum=  后面的周数
             var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
             var r = window.location.search.substr(1).match(reg);
             if (r != null) return unescape(r[2]); return null;
         }
+        $(".close_pic").bind("click", function () {
+            // ale
+            // alert("111111")
+            $('.PIC_1').html('');
+            $('.close_pic').html('');
+        })
         function getbanner() {
             $.ajax({
                 type: "post",
@@ -252,7 +283,9 @@
                 url: "http://wxmpapi.gatao.cn/api/response.do",
                 data: JSON.stringify({
                     action_name: "web_get_carousels",
-                    data: "web_get_carousels"
+                    data: {
+                        book_id: Number(GetQueryString('WNum'))
+                    }
                 }),
                 dataType: 'json',
                 async: true,
@@ -262,9 +295,16 @@
                         // $('#link').attr('href', data.data.renderUrl);
                         // $('#top').css('background-image', 'url(' + data.data.picUrl + ')')
                         console.log(data.data);
-                        $.each(data.data, function (j, y) {
+                        if(data.data.qrcode_url == '') {
+                            $(".PIC_1").html('');
+                            $('.close_pic').html('');
+                        }
+                        else {
+                            $(".PIC_1").html('<div class="QR_Code"><img src="http://7xld1x.com1.z0.glb.clouddn.com/FueQdux8CSVXc8Ajzoe77yMZErT7" width="115" height="165" /></div>')
+                        }
+                        $.each(data.data.list, function (j, y) {
                             console.log(y)
-                            $('.swiper-wrapper').append($('<div class="swiper-slide"><a href=' + y.url + '><img src=' + y.pic_url + ' width="100%" height="180px"/><p id="myp">'+ y.description +'</p></a></div>'));
+                            $('.swiper-wrapper').append($('<div class="swiper-slide"><a href=' + y.url + '><img src=' + y.pic_url + ' width="100%" height="180px"/><p id="myp">' + y.description + '</p></a></div>'));
                         })
                     }
                 },
@@ -282,8 +322,8 @@
                     action_name: "web_get_articles",
                     data: {
                         book_id: Number(GetQueryString('WNum')),
-                        page_no: 1,
-                        page_size: 500
+                        page_no: pagenum,
+                        page_size: 20
                     }
                 }),
                 dataType: 'json',
@@ -296,35 +336,35 @@
                     var ishistory = GetQueryString('Hs');
                     if (data.code == 0) {
                         booklist = data.data.list
-                        if(ishistory == 0){
+                        if (ishistory == 0) {
                             html += '<div class="item"  style="width:50%">' + data.data.book_name + '</div>'
                             var list = ''
                             for (var j in booklist) {
                                 list += '<a class="list_item js_post" href="' + booklist[j].url + '"><div class="cover"><img class="img js_img" src="' + booklist[j].pic + '" alt=""></div><div class="cont"><h2 class="title js_title">' + booklist[j].title + '</h2><p class="desc">' + booklist[j].description + '</p></div></a>'
                             }
-                             article += '<div class="article_list article_list_0">' + list + '</div>'
-                            $(".tab_bd").html(article)
+                            //  article += '<div class="article_list article_list_0">' + list + '</div>'
+                            $(".tab_bd").append(list)
                             $(".tab_bd .article_list:first-child").css('display', 'block')
                         }
-                        else{
+                        else {
                             html += '<div class="item"  style="width:100%">' + data.data.book_name + '</div>'
                             var list = ''
                             for (var j in booklist) {
                                 list += '<a class="list_item js_post" href="' + booklist[j].url + '"><div class="cover"><img class="img js_img" src="' + booklist[j].pic + '" alt=""></div><div class="cont"><h2 class="title js_title">' + booklist[j].title + '</h2><p class="desc">' + booklist[j].description + '</p></div></a>'
                             }
-                             article += '<div class="article_list article_list_0">' + list + '</div>'
-                            $(".tab_bd").html(article)
-                            $(".tab_bd .article_list:first-child").css('display', 'block')                 
+                            //  article += '<div class="article_list article_list_0">' + list + '</div>'
+                            $(".tab_bd").append(list)
+                            $(".tab_bd .article_list:first-child").css('display', 'block')
                         }
 
                     }
                     else {
                         $(".tab_bd").html('<div v-else style="text-align: center;margin-top: 60px;">暂无章节</div>')
                     }
-                    if(ishistory == 0){
+                    if (ishistory == 0) {
                         html += '<a class="item " href="history.html"><div type="index" data-index="3">往期</div></a>'
                     }
-                        $('.tab_hd_inner').html(html)
+                    $('.tab_hd_inner').html(html)
                     $(".item:first-child").addClass('active')
                 },
                 error: function (err) {
@@ -334,7 +374,21 @@
         }
         $(function () {   // 相当于初始化，页面显示的时候执行
             getbanner();
-            getdata();
+            if (pagenum == 1) {
+                getdata();
+            }
+            $(window).scroll(function () {
+                if ($(document).height() - $(this).scrollTop() - $(this).height() < 1) {
+                    if (booklist.length > 0) {
+                        ++pagenum;
+                        getdata();
+                    }
+                    else {
+                        return false;
+                    }
+                }
+                isarr = 0;
+            })
         })
         window.onload = function () {
             var mySwiper = new Swiper('.swiper-container', {
