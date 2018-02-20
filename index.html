@@ -235,8 +235,6 @@
                 <div class="swiper-wrapper">
                 </div>
                 <div class="swiper-pagination" style="padding-left: 150px;"></div>
-                <!-- <div class="swiper-button-prev"></div>
-                <div class="swiper-button-next"></div> -->
             </div>
             <div class="tab_hb">
                 <div class="tab_hd_inner">
@@ -292,12 +290,15 @@
                 success: function (data) {
                     console.log(data.data);
                     if (data.code == 0) {
-                        // $('#link').attr('href', data.data.renderUrl);
-                        // $('#top').css('background-image', 'url(' + data.data.picUrl + ')')
                         console.log(data.data);
                         if(data.data.qrcode_url == '') {
                             $(".PIC_1").html('');
                             $('.close_pic').html('');
+                        }
+                        else if (data.data.length == 0){
+                            $(".PIC_1").html('');
+                            $('.close_pic').html('');     
+                            $('.swiper-container').css('display','none');              
                         }
                         else {
                             $(".PIC_1").html('<div class="QR_Code"><img src="'+ data.data.qrcode_url +'" width="115" height="165" /></div>')
