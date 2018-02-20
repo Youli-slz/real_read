@@ -300,8 +300,12 @@
                             $('.close_pic').html('');     
                             $('.swiper-container').css('display','none');              
                         }
-                        else {
+                        else if (!data.data.url && data.data.qrcode_url){
+                            $('.swiper-container').css('display','none');
                             $(".PIC_1").html('<div class="QR_Code"><img src="'+ data.data.qrcode_url +'" width="115" height="165" /></div>')
+                        }
+                        else {
+                            $(".PIC_1").html('<div class="QR_Code"><img src="'+ data.data.qrcode_url +'" width="115" height="165" /></div>');
                         }
                         $.each(data.data.list, function (j, y) {
                             console.log(y)
